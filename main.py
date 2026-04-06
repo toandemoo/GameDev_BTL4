@@ -36,6 +36,8 @@ while running:
         
         if not menu.game_start or not menu.option:
             menu.handle_event_start(event, game)
+            if menu.option:
+                menu.handle_event_playing(event, game)
         
         elif not menu.handle_event_playing(event, game):
             if not menu.pause:
