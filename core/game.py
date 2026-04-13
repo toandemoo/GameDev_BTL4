@@ -95,6 +95,16 @@ class Game:
                 if self.broad[row][col] == 0:
                     self.broad[row][col] = 2
                     self.player = 1
+                
+                # AI MCTS vs Al Minimax
+                # if self.player == 1:
+                #     mcts_ai = MCTS(self.broad, 1, time_limit=1.5)
+                #     move = mcts_ai.search()
+                #     row, col = move
+
+                #     if self.broad[row][col] == 0:
+                #         self.broad[row][col] = 1
+                #         self.player = 2
         
         if level == 2:
             if self.player == 2:

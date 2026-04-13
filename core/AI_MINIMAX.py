@@ -36,7 +36,7 @@ class BoardSearcher:
         return False
 
     # =========================
-    # 🔥 TÌM NƯỚC THẮNG NGAY
+    # TÌM NƯỚC THẮNG NGAY
     # =========================
     def findWinningMove(self, turn):
         for i in range(BOARD_SIZE):

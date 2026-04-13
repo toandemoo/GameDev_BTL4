@@ -6,7 +6,6 @@ class BoardEvaluator(object):
         self.POS = []
         center = BOARD_SIZE // 2
 
-        # 🔥 cải thiện weight (mượt hơn)
         for i in range(BOARD_SIZE):
             row = []
             for j in range(BOARD_SIZE):
@@ -138,7 +137,6 @@ class BoardEvaluator(object):
                 elif board[i][j] == black:
                     bvalue += self.POS[i][j]
 
-        # 🔥 bias theo lượt
         if turn == white:
             return int((wvalue - bvalue) * 1.1)
         else:

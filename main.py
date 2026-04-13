@@ -2,7 +2,7 @@ import pygame
 from core.game import Game
 from settings import *
 from ui.draw import *
-from core.broad import * 
+# from core.broad import * 
 from menu import * 
 
 pygame.init()
@@ -23,7 +23,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-        # 🎯 MENU ưu tiên khi:
+        # MENU ưu tiên khi:
         # - chưa start
         # - đang pause
         # - chưa chọn level
