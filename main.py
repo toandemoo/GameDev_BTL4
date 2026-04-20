@@ -1,10 +1,13 @@
 import pygame
 from core.game import Game
 from settings import *
-from ui.draw import *
+# from ui.draw import *
 # from core.broad import * 
 from menu import * 
+from server import *
+from client import *
 
+# Main
 pygame.init()
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -14,6 +17,10 @@ clock = pygame.time.Clock()
 game = Game(screen)
 menu = Menu(screen)
 
+# # Game Online
+# server = CaroServer()
+# server.run()
+
 running = True
 
 while running:
@@ -22,17 +29,6 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-
-        # MENU ưu tiên khi:
-        # - chưa start
-        # - đang pause
-        # - chưa chọn level
-        # if menu.game_start and not menu.pause and not game.game_over: 
-        #     game.handle_event(event) 
-        # start screen
-        # option screen
-        # pause screen
-        # result screen
         
         if not menu.game_start or not menu.option:
             menu.handle_event_start(event, game)
@@ -51,10 +47,11 @@ while running:
             game.update(menu.level)
         
         game.draw()
+        game.draw_Your_turn_play_online(screen)
         menu.draw_pause()
     
         if game.game_over:
-            menu.draw_result(game.winner)
+            menu.draw_result(game)
 
     pygame.display.flip()
 

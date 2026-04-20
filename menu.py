@@ -93,6 +93,12 @@ class Menu:
         self.advance_btn_rect.center = screen_rect.center
         self.advance_btn_rect.y = self.medium_btn_rect.bottom + 20
         
+        self.playonline_btn = pygame.image.load("assets/images/playonline_btn.png").convert_alpha()
+        self.playonline_btn = pygame.transform.scale(self.playonline_btn, (200, 50))
+        self.playonline_btn_rect = self.playonline_btn.get_rect()
+        self.playonline_btn_rect.center = screen_rect.center
+        self.playonline_btn_rect.y = self.advance_btn_rect.bottom + 20
+        
         self.view_result_img = pygame.image.load("assets/images/viewresult_btn.png").convert_alpha()
         self.back_img = pygame.image.load("assets/images/back_btn.png").convert_alpha()
         self.viewresult_btn = pygame.image.load("assets/images/viewresult_btn.png").convert_alpha()
@@ -128,6 +134,10 @@ class Menu:
                     return True
                 elif self.advance_btn_rect.collidepoint(x, y):
                     self.level = 3
+                    self.option = True
+                    return True
+                elif self.playonline_btn_rect.collidepoint(x, y):
+                    self.level = 4
                     self.option = True
                     return True
                 
@@ -179,16 +189,7 @@ class Menu:
                 self.pause = False
                 return True
             
-
-                    
-
         return False
-    
-    def game_again(self):
-        pass
-        
-    def update(self):
-        pass
         
     def draw(self):
         if not self.game_start:
@@ -206,9 +207,8 @@ class Menu:
             self.screen.blit(self.easy_btn, self.easy_btn_rect)
             self.screen.blit(self.medium_btn, self.medium_btn_rect)
             self.screen.blit(self.advance_btn, self.advance_btn_rect)
+            self.screen.blit(self.playonline_btn, self.playonline_btn_rect)
             
-            
-    
     def draw_pause(self):
         self.screen.blit(self.pause_btn, self.pause_btn_rect)
         if self.pause:
@@ -223,16 +223,22 @@ class Menu:
             self.screen.blit(self.continue_btn, self.continue_btn_rect)
             self.screen.blit(self.exit_btn, self.exit_btn_rect)
     
-    def draw_result(self, result):
+    def draw_result(self, game):
         if self.view_result:
             overlay = pygame.Surface((WIDTH, HEIGHT))
             overlay.set_alpha(150)  # độ trong suốt (0-255)
             overlay.fill((0, 0, 0))  # màu đen
             self.screen.blit(overlay, (0, 0))
-            if result == 1:
-                self.screen.blit(self.winner_text, self.winner_text_rect)
+            if game.playOnline():
+                if game.winner == game.player:
+                    self.screen.blit(self.winner_text, self.winner_text_rect)
+                else:
+                    self.screen.blit(self.gameover_text, self.gameover_text_rect)
             else:
-                self.screen.blit(self.gameover_text, self.gameover_text_rect)
+                if game.winner == 1:
+                    self.screen.blit(self.winner_text, self.winner_text_rect)
+                else:
+                    self.screen.blit(self.gameover_text, self.gameover_text_rect)
             
             self.screen.blit(self.playagain_btn, self.playagain_btn_rect)
             self.screen.blit(self.exit_btn, self.exit_btn_rect)
